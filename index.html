@@ -7,22 +7,24 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Comic+Neue:wght@700&family=Oswald:wght@500;700&display=swap" rel="stylesheet">
 <style>
-:root{--navy:#0b1d4a;--red:#c8102e;--gold:#f4c430;--cream:#fff4d6;--sky:#7ec8e3}
+:root{--navy:#0b1d4a;--red:#c8102e;--gold:#f4c430;--cream:#fff4d6}
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Oswald',sans-serif;background:#07122e;color:#fff;overflow-x:hidden}
-.ticker{background:var(--gold);color:#111;font-weight:700;white-space:nowrap;overflow:hidden;padding:8px 0;letter-spacing:.04em}
+.ticker{background:var(--gold);color:#111;font-weight:700;white-space:nowrap;overflow:hidden;padding:8px 0}
 .ticker span{display:inline-block;animation:slide 28s linear infinite}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.hero{min-height:92vh;background:radial-gradient(circle at 20% 20%,#1b3a8a,transparent 40%),linear-gradient(160deg,#07122e,#c8102e 140%);padding:40px 24px 80px;text-align:center;position:relative}
+.hero{min-height:92vh;background:radial-gradient(circle at 20% 20%,#1b3a8a,transparent 40%),linear-gradient(160deg,#07122e,#c8102e 140%);padding:40px 24px 80px;text-align:center}
 .stamp{display:inline-block;border:4px dashed var(--gold);color:var(--gold);padding:6px 14px;transform:rotate(-6deg);margin-bottom:18px;font-family:'Comic Neue',cursive}
 h1{font-family:'Bebas Neue',cursive;font-size:clamp(3.2rem,12vw,9rem);line-height:.85;text-shadow:6px 6px 0 #000}
 h1 em{color:var(--gold);font-style:normal}
 .sub{max-width:740px;margin:18px auto 0;font-size:1.25rem;color:#ffe}
-.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:18px;max-width:1100px;margin:36px auto 0}
-.photo{background:#0a1638;border:4px solid #fff;box-shadow:10px 10px 0 #000;overflow:hidden}
-.photo .art{height:220px;position:relative}
+.hero-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;max-width:1100px;margin:36px auto 0}
+.photo{background:#0a1638;border:4px solid #fff;box-shadow:10px 10px 0 #000;overflow:hidden;text-align:left}
+.photo img{width:100%;height:280px;object-fit:cover;display:block;background:#111}
+.photo.tall img{height:380px;object-fit:cover;object-position:top}
 .photo figcaption{padding:10px;background:#111;font-size:.85rem;text-transform:uppercase}
 .badge{position:absolute;top:8px;left:8px;background:var(--gold);color:#111;font-size:.7rem;padding:3px 7px;z-index:2}
+.artwrap{position:relative}
 section{padding:70px 22px;max-width:1100px;margin:0 auto}
 h2{font-family:'Bebas Neue';font-size:clamp(2.2rem,6vw,4.2rem);margin-bottom:18px}
 .reasons{display:grid;gap:22px}
@@ -32,46 +34,28 @@ h2{font-family:'Bebas Neue';font-size:clamp(2.2rem,6vw,4.2rem);margin-bottom:18p
 .stat{background:#000;padding:16px;text-align:center;border:2px solid var(--red)}
 .stat b{display:block;font-size:2rem;color:var(--gold)}
 .quote{font-family:'Comic Neue',cursive;font-size:1.4rem;background:var(--cream);color:#111;padding:28px;border:6px solid #111;transform:rotate(-1.2deg);margin:24px 0}
-.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:18px}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px}
 .faq details{background:#101c44;margin:10px 0;padding:14px;border-left:6px solid var(--red)}
 footer{text-align:center;padding:40px 16px;background:#000;color:#aaa;font-size:.9rem}
 button.boom{cursor:pointer;background:var(--gold);border:0;padding:16px 28px;font:700 1.2rem Oswald;margin-top:20px;box-shadow:5px 5px 0 #000}
 .popup{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:9}
 .popup.show{display:flex}
 .popup .box{background:var(--cream);color:#111;padding:30px;max-width:420px;text-align:center;border:8px solid var(--red)}
-/* cartoon scenes */
-.s1{background:linear-gradient(#7ec8e3,#c8e8f5);}
-.s2{background:linear-gradient(#1a0a3a,#4b1d8f 60%,#f4c430)}
-.s3{background:linear-gradient(#0a3,#6f6)}
-.s4{background:linear-gradient(#222,#c8102e)}
-.face{position:absolute;left:50%;top:40px;transform:translateX(-50%);width:90px;height:110px;background:#f3c7a5;border-radius:45% 45% 40% 40%;border:3px solid #333}
-.hair{position:absolute;top:-18px;left:8px;right:8px;height:40px;background:#3a2415;border-radius:40px 40px 8px 8px}
-.helm{position:absolute;top:-8px;left:-10px;right:-10px;height:48px;background:#c8102e;border-radius:40px 40px 8px 8px;border:3px solid #fff}
-.eyes{position:absolute;top:42px;left:18px;right:18px;display:flex;justify-content:space-between}
-.eye{width:14px;height:14px;background:#111;border-radius:50%}
-.smile{position:absolute;bottom:28px;left:28px;right:28px;height:16px;border-bottom:4px solid #111;border-radius:0 0 20px 20px}
-.jersey{position:absolute;bottom:8px;left:50%;transform:translateX(-50%);width:130px;height:80px;background:#002244;border:3px solid #c8102e}
-.num{color:#fff;font-size:2rem;text-align:center;line-height:80px}
-.ball{position:absolute;width:34px;height:22px;background:#8b4513;border-radius:50%;border:2px solid #3a1}
-.sun{position:absolute;right:16px;top:12px;width:40px;height:40px;background:#ffd54a;border-radius:50%}
 </style>
 </head>
 <body>
-<div class="ticker"><span>BREAKING: DRAKE MAYE CONFIRMED HIM • SCIENTISTS BAFFLED BY ACCURACY OF THIS WEBSITE • INTERCEPTIONS ARE JUST LONG INCOMPLETE TOUCHDOWNS FOR THE OTHER TEAM • PICKLEBALL HANDS TRANSLATE TO NFL GREATNESS • SHORTEST BROTHER = MOST DANGEROUS BROTHER • DRAKE "DRAKE MAYE" MAYE • BREAKING: DRAKE MAYE CONFIRMED HIM • SCIENTISTS BAFFLED BY ACCURACY OF THIS WEBSITE • </span></div>
-
+<div class="ticker"><span>BREAKING: DRAKE MAYE CONFIRMED HIM • SCIENTISTS BAFFLED BY ACCURACY OF THIS WEBSITE • INTERCEPTIONS ARE JUST LONG INCOMPLETE TOUCHDOWNS FOR THE OTHER TEAM • PICKLEBALL HANDS TRANSLATE TO NFL GREATNESS • SHORTEST BROTHER = MOST DANGEROUS BROTHER • DRAKE "DRAKE MAYE" MAYE • </span></div>
 <header class="hero">
   <div class="stamp">PEER REVIEWED BY A GUY NAMED CHIP</div>
   <h1>WHY <em>DRAKE MAYE</em><br>IS GOING TO BE GOOD</h1>
-  <p class="sub">A 100% serious, definitely not unhinged briefing from the Institute of Patriots Destiny. If you disagree, that is a you problem and also historically incorrect.</p>
+  <p class="sub">A 100% serious briefing from the Institute of Patriots Destiny. Now with laboratory-grade AI photographs.</p>
   <div class="hero-grid">
-    <figure class="photo"><div class="art s1"><span class="badge">AI PHOTO 01</span><div class="sun"></div><div class="face"><div class="hair"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div><div class="jersey"><div class="num">10</div></div><div class="ball" style="right:18px;bottom:30px"></div></div><figcaption>Artist recreation: Maye throwing a football so hard it files taxes</figcaption></figure>
-    <figure class="photo"><div class="art s2"><span class="badge">AI PHOTO 02</span><div class="face" style="top:20px"><div class="helm"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div><div class="jersey"><div class="num">MVP</div></div></div><figcaption>Maye accepting an award that has not been invented yet</figcaption></figure>
-    <figure class="photo"><div class="art s3"><span class="badge">AI PHOTO 03</span><div class="face"><div class="hair"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div></div><figcaption>Maye after beating two people at pickleball while calling himself right-handed Ben Shelton</figcaption></figure>
-    <figure class="photo"><div class="art s4"><span class="badge">AI PHOTO 04</span><div class="face"><div class="helm"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div><div class="jersey"><div class="num">SB</div></div></div><figcaption>Classified: Drake Maye high-fiving the concept of winning</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 01</span><img id="img-tax-a" alt="Maye throwing a football so hard it files taxes"></div><figcaption>Artist recreation: Maye throwing a football so hard it files taxes</figcaption></figure>
+    <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 02</span><img id="img-mvp-a" alt="Maye accepting an award that has not been invented yet"></div><figcaption>Maye accepting an award that has not been invented yet</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 03</span><img id="img-pkl-a" alt="Maye dominating pickleball"></div><figcaption>Maye after beating two people at pickleball while calling himself right-handed Ben Shelton</figcaption></figure>
   </div>
   <button class="boom" onclick="document.getElementById('pop').classList.add('show')">PRESS FOR A SCIENTIFIC FACT</button>
 </header>
-
 <section>
   <h2>THE BRIEFING (DO NOT ALERT THE BILLS)</h2>
   <p>Drake Maye is 6'4", from Charlotte, went to North Carolina, got drafted 3rd overall in 2024, and then immediately started collecting Pro Bowls like they were grocery-store punch cards. In 2025 he threw for 4,394 yards, 31 touchdowns, led the league in completion percentage, finished second in MVP voting by five points, and took New England to the Super Bowl. That is not a quarterback. That is a weather system with a playbook.</p>
@@ -83,62 +67,46 @@ button.boom{cursor:pointer;background:var(--gold);border:0;padding:16px 28px;fon
     <div class="stat"><b>72%</b>completion rate in 2025, which is illegal in 14 states</div>
   </div>
 </section>
-
 <section>
   <h2>WHY HE IS GOING TO BE GOOD (CRAZY BUT PEER-REVIEWED)</h2>
   <div class="reasons">
-    <article class="card"><h3>1. The 2026 slump is performance art</h3><p>Three games, six interceptions, one touchdown. Cowards call this "struggling." Scholars call it "loading the cheat code." He is clearly leaking points on purpose so the rest of the AFC feels safe. This is the football version of a cat knocking a glass off the table to assert dominance.</p></article>
-    <article class="card"><h3>2. He is the shortest Maye brother, which is steroid for personality</h3><p>Luke, Cole, and Beau are taller. Drake is 6'4" and still the family smurf. That means he spent his entire childhood throwing passes over people who were built like small apartment buildings. NFL defensive ends are just cousins he has not met.</p></article>
-    <article class="card"><h3>3. His arm is a weather warning</h3><p>Combine numbers said 32¼-inch arms. Unofficial sources (this website) say the football leaves his hand, files a flight plan, and arrives with a souvenir magnet. If a route is 20 yards downfield, Maye throws it 21 out of respect.</p></article>
-    <article class="card"><h3>4. Pickleball is a secret QB drill</h3><p>He trash-talks on a pickleball court and has called himself Roger Federer, Carlos Alcaraz, and "right-handed Ben Shelton." A man who invents nicknames for himself mid-rally is not going to be scared of Cover 2.</p></article>
-    <article class="card"><h3>5. He does not even need a nickname</h3><p>Fans tried to give him a cool handle and the culture said no. He is Drake "Drake Maye" Maye. When your name is the compliment, the scouting report is finished.</p></article>
-    <article class="card"><h3>6. Foxborough gravity is on his side</h3><p>The stadium is cold, the fans are legally required to be dramatic, and the franchise has a historic allergy to being average for long. Maye already dragged this team back to a Super Bowl once. The building remembers.</p></article>
-    <article class="card"><h3>7. Interceptions are just aggressive gifts</h3><p>He is so generous he sometimes lets the other team hold the ball. Generosity is a leadership trait. Also he will stop doing this approximately five minutes after you finish reading this sentence. Trust the process. Trust the cannon. Trust the guy who dates his seventh-grade girlfriend and still cooks NFL secondaries.</p></article>
+    <article class="card"><h3>1. The 2026 slump is performance art</h3><p>Three games, six interceptions, one touchdown. Cowards call this "struggling." Scholars call it "loading the cheat code."</p></article>
+    <article class="card"><h3>2. He is the shortest Maye brother, which is steroid for personality</h3><p>Luke, Cole, and Beau are taller. Drake is 6'4" and still the family smurf. NFL defensive ends are just cousins he has not met.</p></article>
+    <article class="card"><h3>3. His arm is a weather warning</h3><p>The football leaves his hand, files a flight plan, and arrives with a souvenir magnet. Also it appears to file taxes.</p></article>
+    <article class="card"><h3>4. Pickleball is a secret QB drill</h3><p>A man who invents nicknames for himself mid-rally is not going to be scared of Cover 2.</p></article>
+    <article class="card"><h3>5. He does not even need a nickname</h3><p>He is Drake "Drake Maye" Maye. When your name is the compliment, the scouting report is finished.</p></article>
+    <article class="card"><h3>6. Foxborough gravity is on his side</h3><p>Maye already dragged this team back to a Super Bowl once. The building remembers.</p></article>
+    <article class="card"><h3>7. Interceptions are just aggressive gifts</h3><p>Trust the process. Trust the cannon. Trust the guy who dates his seventh-grade girlfriend and still cooks NFL secondaries.</p></article>
   </div>
 </section>
-
 <section>
   <h2>EVIDENCE LOCKER</h2>
   <div class="gallery">
-    <figure class="photo"><div class="art s2"><span class="badge">AI PHOTO 05</span><div class="face"><div class="hair"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div></div><figcaption>Maye negotiating with gravity. Gravity lost.</figcaption></figure>
-    <figure class="photo"><div class="art s1"><span class="badge">AI PHOTO 06</span><div class="face"><div class="helm"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div><div class="jersey"><div class="num">10</div></div></div><figcaption>Training camp photo if training camp were on the moon.</figcaption></figure>
-    <figure class="photo"><div class="art s4"><span class="badge">AI PHOTO 07</span><div class="face"><div class="hair"></div><div class="eyes"><i class="eye"></i><i class="eye"></i></div><div class="smile"></div></div></div><figcaption>Maye explaining film to a seagull that asked for the 2-minute drill.</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 04</span><img id="img-tax-b" alt="Maye vs gravity and the IRS"></div><figcaption>Maye negotiating with gravity. Gravity lost. The IRS also lost.</figcaption></figure>
+    <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 05</span><img id="img-mvp-b" alt="Future award"></div><figcaption>Official portrait for an award that has not been invented yet.</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 06</span><img id="img-pkl-b" alt="Pickleball film session"></div><figcaption>Training camp, if training camp were pickleball and a seagull with sunglasses.</figcaption></figure>
   </div>
 </section>
-
 <section class="faq">
   <h2>FREQUENTLY UNASKED QUESTIONS</h2>
   <details open><summary>Is this website unbiased?</summary><p>Yes. Our only bias is being correct.</p></details>
   <details><summary>What if he throws another pick?</summary><p>That pick is planting a tree for the future. Do not question forestry.</p></details>
   <details><summary>Can the Bills stop him?</summary><p>They can try. Trying is cute.</p></details>
-  <details><summary>Is Drake Maye going to be good?</summary><p>He already was. The sequel is loading. Please remain seated.</p></details>
+  <details><summary>Are the photos real AI photos?</summary><p>Yes. They were generated in a lab that also believes in destiny.</p></details>
 </section>
-
-<footer>
-  Not affiliated with the Patriots, UNC, pickleball, or the laws of physics.<br>
-  Facts mixed with circus peanuts. Drake Maye remains a real quarterback. This website remains a cry for help and also a love letter.
-</footer>
-
+<footer>Not affiliated with the Patriots, UNC, pickleball, or the laws of physics.</footer>
 <div class="popup" id="pop" onclick="this.classList.remove('show')">
-  <div class="box">
-    <h3>LAB RESULT</h3>
-    <p id="fact">Maye's football has its own frequent flyer account.</p>
-    <p style="margin-top:12px;font-size:.8rem">click anywhere to close</p>
-  </div>
+  <div class="box"><h3>LAB RESULT</h3><p id="fact">Maye's football has its own frequent flyer account.</p><p style="margin-top:12px;font-size:.8rem">click anywhere to close</p></div>
 </div>
+<script src="photos/tax.js"></script>
+<script src="photos/mvp.js"></script>
+<script src="photos/pkl.js"></script>
 <script>
-const facts=[
-  'Maye once completed a pass to a guy who was not born yet.',
-  'His nickname is his name because nicknames were intimidated.',
-  'The 6 interceptions are just the football doing reconnaissance.',
-  'He is the shortest brother and still the tallest problem.',
-  'Pickleball + cannon arm = civilization.',
-  'Second in MVP voting is just first with extra suspense.',
-  'Gillette Stadium is slightly tilted toward the end zone he is looking at.'
-];
-document.querySelector('.boom').addEventListener('click',()=>{
-  document.getElementById('fact').textContent=facts[Math.floor(Math.random()*facts.length)];
-});
+function paint(id, b64){ var el=document.getElementById(id); if(el&&b64) el.src='data:image/jpeg;base64,'+b64; }
+paint('img-tax-a', window.B64_TAX); paint('img-tax-b', window.B64_TAX);
+paint('img-mvp-a', window.B64_MVP); paint('img-mvp-b', window.B64_MVP);
+paint('img-pkl-a', window.B64_PKL); paint('img-pkl-b', window.B64_PKL);
+const facts=['Maye once completed a pass to a guy who was not born yet.','His nickname is his name because nicknames were intimidated.','The 6 interceptions are just the football doing reconnaissance.','He is the shortest brother and still the tallest problem.','Pickleball + cannon arm = civilization.','Second in MVP voting is just first with extra suspense.','Gillette Stadium is slightly tilted toward the end zone he is looking at.'];
+document.querySelector('.boom').addEventListener('click',()=>{ document.getElementById('fact').textContent=facts[Math.floor(Math.random()*facts.length)]; });
 </script>
-</body>
-</html>
+</body></html>
