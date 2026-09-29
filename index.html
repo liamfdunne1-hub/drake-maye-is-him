@@ -37,18 +37,20 @@ button.boom{cursor:pointer;background:var(--gold);border:0;padding:16px 28px;fon
 .popup{position:fixed;inset:0;background:#000c;display:none;align-items:center;justify-content:center;z-index:9}
 .popup.show{display:flex}
 .popup .box{background:var(--cream);color:#111;padding:30px;max-width:420px;text-align:center;border:8px solid var(--red)}
+.ph{display:flex;align-items:center;justify-content:center;height:280px;background:#111;color:var(--gold)}
+.photo.tall .ph{height:380px}
 </style>
 </head>
 <body>
-<div class="ticker"><span>BREAKING: DRAKE MAYE CONFIRMED HIM • AI PHOTOS ONLINE • INTERCEPTIONS ARE RECONNAISSANCE • DRAKE "DRAKE MAYE" MAYE • </span></div>
+<div class="ticker"><span>BREAKING: DRAKE MAYE CONFIRMED HIM • AI PHOTOS RESTORED • INTERCEPTIONS ARE RECONNAISSANCE • DRAKE "DRAKE MAYE" MAYE • </span></div>
 <header class="hero">
   <div class="stamp">PEER REVIEWED BY A GUY NAMED CHIP</div>
   <h1>WHY <em>DRAKE MAYE</em><br>IS GOING TO BE GOOD</h1>
   <p class="sub">A 100% serious briefing from the Institute of Patriots Destiny. Illustrated with laboratory AI photographs.</p>
   <div class="hero-grid">
-    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 01</span><img src="photos/tax.jpg" alt="Maye throwing a flaming tax form"></div><figcaption>Maye throwing a football so hard it files taxes</figcaption></figure>
-    <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 02</span><img src="photos/mvp.jpg" alt="Maye with uninvented trophy"></div><figcaption>Maye accepting an award that has not been invented yet</figcaption></figure>
-    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 03</span><img src="photos/pkl.jpg" alt="Maye pickleball"></div><figcaption>Maye beating two people at pickleball as right-handed Ben Shelton</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 01</span><img id="tax-a" alt="tax football"><div class="ph" id="tax-a-ph">loading classified photo...</div></div><figcaption>Maye throwing a football so hard it files taxes</figcaption></figure>
+    <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 02</span><img id="mvp-a" alt="future trophy"><div class="ph" id="mvp-a-ph">loading classified photo...</div></div><figcaption>Maye accepting an award that has not been invented yet</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 03</span><img id="pkl-a" alt="pickleball"><div class="ph" id="pkl-a-ph">loading classified photo...</div></div><figcaption>Maye beating two people at pickleball as right-handed Ben Shelton</figcaption></figure>
   </div>
   <button class="boom" type="button">PRESS FOR A SCIENTIFIC FACT</button>
 </header>
@@ -74,14 +76,34 @@ button.boom{cursor:pointer;background:var(--gold);border:0;padding:16px 28px;fon
 <section>
   <h2>EVIDENCE LOCKER</h2>
   <div class="gallery">
-    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 04</span><img src="photos/tax.jpg" alt="tax"></div><figcaption>Gravity lost. The IRS also lost.</figcaption></figure>
-    <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 05</span><img src="photos/mvp.jpg" alt="trophy"></div><figcaption>Official portrait for an award not invented yet.</figcaption></figure>
-    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 06</span><img src="photos/pkl.jpg" alt="pickleball"></div><figcaption>Pickleball camp featuring a seagull with sunglasses.</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 04</span><img id="tax-b" alt="tax"><div class="ph" id="tax-b-ph">loading...</div></div><figcaption>Gravity lost. The IRS also lost.</figcaption></figure>
+    <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 05</span><img id="mvp-b" alt="trophy"><div class="ph" id="mvp-b-ph">loading...</div></div><figcaption>Official portrait for an award not invented yet.</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 06</span><img id="pkl-b" alt="pickleball"><div class="ph" id="pkl-b-ph">loading...</div></div><figcaption>Pickleball camp featuring a seagull with sunglasses.</figcaption></figure>
   </div>
 </section>
 <footer>Not affiliated with the Patriots, UNC, pickleball, or physics.</footer>
 <div class="popup" id="pop"><div class="box"><h3>LAB RESULT</h3><p id="fact">Maye's football has its own frequent flyer account.</p><p style="margin-top:12px;font-size:.8rem">click anywhere to close</p></div></div>
 <script>
+function paint(ids, b64){
+  ids.forEach(function(id){
+    var img=document.getElementById(id);
+    var ph=document.getElementById(id+'-ph');
+    if(!img) return;
+    img.onload=function(){ if(ph) ph.remove(); };
+    img.onerror=function(){ if(ph) ph.textContent='photo still decrypting'; };
+    img.src='data:image/jpeg;base64,'+b64;
+  });
+}
+function loadParts(prefix, count, ids){
+  var jobs=[];
+  for(var i=0;i<count;i++) jobs.push(fetch(prefix+i+'.txt').then(function(r){ if(!r.ok) throw new Error('missing'); return r.text(); }));
+  Promise.all(jobs).then(function(parts){ paint(ids, parts.join('')); }).catch(function(){
+    ids.forEach(function(id){ var ph=document.getElementById(id+'-ph'); if(ph) ph.textContent='photo still decrypting'; });
+  });
+}
+loadParts('photos/tax.', 4, ['tax-a','tax-b']);
+loadParts('photos/mvp.', 5, ['mvp-a','mvp-b']);
+loadParts('photos/pkl.', 3, ['pkl-a','pkl-b']);
 const facts=['Maye once completed a pass to a guy who was not born yet.','His nickname is his name because nicknames were intimidated.','The 6 interceptions are reconnaissance.','Shortest brother, tallest problem.','Pickleball + cannon arm = civilization.'];
 document.querySelector('.boom').onclick=function(){ document.getElementById('fact').textContent=facts[Math.floor(Math.random()*facts.length)]; document.getElementById('pop').classList.add('show'); };
 document.getElementById('pop').onclick=function(){ this.classList.remove('show'); };
