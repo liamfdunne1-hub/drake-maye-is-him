@@ -42,7 +42,7 @@ button.boom{cursor:pointer;background:var(--gold);border:0;padding:16px 28px;fon
 </style>
 </head>
 <body>
-<div class="ticker"><span>BREAKING: DRAKE MAYE CONFIRMED HIM • AI PHOTOS RESTORED • INTERCEPTIONS ARE JUST LONG INCOMPLETE TOUCHDOWNS • DRAKE "DRAKE MAYE" MAYE • </span></div>
+<div class="ticker"><span>BREAKING: DRAKE MAYE CONFIRMED HIM • AI PHOTOS RESTORED • INTERCEPTIONS ARE RECONNAISSANCE • DRAKE "DRAKE MAYE" MAYE • </span></div>
 <header class="hero">
   <div class="stamp">PEER REVIEWED BY A GUY NAMED CHIP</div>
   <h1>WHY <em>DRAKE MAYE</em><br>IS GOING TO BE GOOD</h1>
@@ -56,27 +56,27 @@ button.boom{cursor:pointer;background:var(--gold);border:0;padding:16px 28px;fon
 </header>
 <section>
   <h2>THE BRIEFING (DO NOT ALERT THE BILLS)</h2>
-  <p>Drake Maye is 6'4", from Charlotte, went to North Carolina, got drafted 3rd overall in 2024, and then started collecting Pro Bowls like grocery-store punch cards. In 2025 he threw for 4,394 yards, 31 touchdowns, led the league in completion percentage, finished second in MVP voting, and took New England to the Super Bowl. That is not a quarterback. That is a weather system with a playbook.</p>
+  <p>Drake Maye is 6'4", from Charlotte, went to North Carolina, got drafted 3rd overall in 2024, and then started collecting Pro Bowls like grocery-store punch cards. In 2025 he threw for 4,394 yards, 31 touchdowns, led the league in completion percentage, finished second in MVP voting, and took New England to the Super Bowl.</p>
   <div class="quote">"Drake 'Drake Maye' Maye" is not a nickname. It is a legal name change the universe performed without paperwork.</div>
   <div class="stats">
     <div class="stat"><b>6'4"</b>tall enough to see next season</div>
     <div class="stat"><b>#10</b>because 12 was already emotionally complicated</div>
     <div class="stat"><b>2</b>Pro Bowls before some QBs find the cafeteria</div>
-    <div class="stat"><b>72%</b>completion rate in 2025, which is illegal in 14 states</div>
+    <div class="stat"><b>72%</b>completion rate in 2025, illegal in 14 states</div>
   </div>
 </section>
 <section>
   <h2>WHY HE IS GOING TO BE GOOD</h2>
   <article class="card"><h3>1. The 2026 slump is performance art</h3><p>Six interceptions is just the football doing reconnaissance.</p></article>
-  <article class="card"><h3>2. Shortest Maye brother = most dangerous</h3><p>He is 6'4" and still the family smurf. NFL ends are cousins he has not met.</p></article>
-  <article class="card"><h3>3. His arm files a flight plan</h3><p>If the route is 20 yards, he throws it 21 out of respect. Also it files taxes.</p></article>
+  <article class="card"><h3>2. Shortest Maye brother = most dangerous</h3><p>He is 6'4" and still the family smurf.</p></article>
+  <article class="card"><h3>3. His arm files a flight plan</h3><p>Also it files taxes.</p></article>
   <article class="card"><h3>4. Pickleball is a secret QB drill</h3><p>A man who nicknames himself mid-rally is not scared of Cover 2.</p></article>
   <article class="card"><h3>5. The nickname is the name</h3><p>Drake "Drake Maye" Maye. Scouting report over.</p></article>
 </section>
 <section>
   <h2>EVIDENCE LOCKER</h2>
   <div class="gallery">
-    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 04</span><img id="tax-b" alt="tax football"><div class="ph" id="tax-b-ph">loading...</div></div><figcaption>Gravity lost. The IRS also lost.</figcaption></figure>
+    <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 04</span><img id="tax-b" alt="tax"><div class="ph" id="tax-b-ph">loading...</div></div><figcaption>Gravity lost. The IRS also lost.</figcaption></figure>
     <figure class="photo tall"><div class="artwrap"><span class="badge">AI PHOTO 05</span><img id="mvp-b" alt="trophy"><div class="ph" id="mvp-b-ph">loading...</div></div><figcaption>Official portrait for an award not invented yet.</figcaption></figure>
     <figure class="photo"><div class="artwrap"><span class="badge">AI PHOTO 06</span><img id="pkl-b" alt="pickleball"><div class="ph" id="pkl-b-ph">loading...</div></div><figcaption>Pickleball camp featuring a seagull with sunglasses.</figcaption></figure>
   </div>
@@ -90,19 +90,20 @@ function paint(ids, b64){
     var ph=document.getElementById(id+'-ph');
     if(!img) return;
     img.onload=function(){ if(ph) ph.remove(); };
-    img.src='data:image/jpeg;base64,'+b64.trim();
+    img.onerror=function(){ if(ph) ph.textContent='photo still decrypting'; };
+    img.src='data:image/jpeg;base64,'+b64;
   });
 }
-function loadPhoto(file, ids){
-  fetch(file).then(function(r){ if(!r.ok) throw new Error(file); return r.text(); }).then(function(t){
-    paint(ids, t.replace(/^data:image\/jpeg;base64,/, ''));
-  }).catch(function(){
+function loadParts(prefix, count, ids){
+  var jobs=[];
+  for(var i=0;i<count;i++) jobs.push(fetch(prefix+i+'.txt').then(function(r){ if(!r.ok) throw new Error('missing'); return r.text(); }));
+  Promise.all(jobs).then(function(parts){ paint(ids, parts.join('')); }).catch(function(){
     ids.forEach(function(id){ var ph=document.getElementById(id+'-ph'); if(ph) ph.textContent='photo still decrypting'; });
   });
 }
-loadPhoto('photos/tax.b64', ['tax-a','tax-b']);
-loadPhoto('photos/mvp.b64', ['mvp-a','mvp-b']);
-loadPhoto('photos/pkl.b64', ['pkl-a','pkl-b']);
+loadParts('photos/tax.', 4, ['tax-a','tax-b']);
+loadParts('photos/mvp.', 5, ['mvp-a','mvp-b']);
+loadParts('photos/pkl.', 3, ['pkl-a','pkl-b']);
 const facts=['Maye once completed a pass to a guy who was not born yet.','His nickname is his name because nicknames were intimidated.','The 6 interceptions are reconnaissance.','Shortest brother, tallest problem.','Pickleball + cannon arm = civilization.'];
 document.querySelector('.boom').onclick=function(){ document.getElementById('fact').textContent=facts[Math.floor(Math.random()*facts.length)]; document.getElementById('pop').classList.add('show'); };
 document.getElementById('pop').onclick=function(){ this.classList.remove('show'); };
