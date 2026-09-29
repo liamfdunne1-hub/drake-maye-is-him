@@ -1,1 +1,1 @@
-AI photo payloads live here as .b64 files
+photos are loaded from pkl.b64 tax.b64 mvp.b64
